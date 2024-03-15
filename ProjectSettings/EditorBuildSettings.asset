@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Dont_programmist/Scenes/LVL-design/Lvl_4.unity
     guid: 5dc8a361234584546bbeda84988da927
+  - enabled: 1
+    path: Assets/Dont_programmist/Scenes/LVL-design/Lvl_5.unity
+    guid: 448ad2c24e2c03145ab16b9a94cc17d5
+  - enabled: 1
+    path: Assets/Dont_programmist/Scenes/LVL-design/Lvl_6.unity
+    guid: 600be7671350f134497de529bd96b6c0
   m_configObjects: {}
