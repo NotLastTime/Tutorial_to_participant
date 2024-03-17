@@ -3,15 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dead_zone : MonoBehaviour
+namespace Test
 {
-
-    private void OnTriggerEnter(Collider other)
+    public class Dead_zone : MonoBehaviour
     {
-        if (other.GetComponent<ThirdPersonController>())
-        {
-            Game_administrator.Singleton.Lose_game();
-        }
-    }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.GetComponent<ThirdPersonController>())
+            {
+                Game_administrator.Singleton.Lose_game();
+            }
+        }
+
+    }
 }

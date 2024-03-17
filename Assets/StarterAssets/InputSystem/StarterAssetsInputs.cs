@@ -1,6 +1,7 @@
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
+using Test;
 #endif
 
 namespace StarterAssets
@@ -20,41 +21,67 @@ namespace StarterAssets
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
 
+		bool Control_bool = true;
+
+        private void Start()
+        {
+			Game_administrator.Singleton.Player_control_event.AddListener(Change_control); 
+        }
+
 #if ENABLE_INPUT_SYSTEM
-		public void OnMove(InputValue value)
+        public void OnMove(InputValue value)
 		{
 			MoveInput(value.Get<Vector2>());
-		}
+        }
 
 		public void OnLook(InputValue value)
 		{
-			if(cursorInputForLook)
+                if (cursorInputForLook)
 			{
-				LookInput(value.Get<Vector2>());
-			}
+                    LookInput(value.Get<Vector2>());
+            }
+
 		}
 
 		public void OnJump(InputValue value)
 		{
-			JumpInput(value.isPressed);
-		}
+            if (Control_bool)
+                JumpInput(value.isPressed);
+			else
+                JumpInput(false);
+        }
 
 		public void OnSprint(InputValue value)
 		{
-			SprintInput(value.isPressed);
-		}
+            if (Control_bool)
+                SprintInput(value.isPressed);
+            else
+                SprintInput(false);
+        }
 #endif
 
+		void Change_control(bool _change)
+		{
+			Control_bool = _change;
+			MoveInput(Vector2.zero);
+            LookInput(Vector2.zero);
+        }
 
 		public void MoveInput(Vector2 newMoveDirection)
 		{
-			move = newMoveDirection;
-		} 
+            if (Control_bool)
+                move = newMoveDirection;
+            else
+                move = Vector2.zero;
+        } 
 
 		public void LookInput(Vector2 newLookDirection)
 		{
-			look = newLookDirection;
-		}
+            if (Control_bool)
+                look = newLookDirection;
+            else
+                look = Vector2.zero;
+        }
 
 		public void JumpInput(bool newJumpState)
 		{

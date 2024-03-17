@@ -3,13 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Finish_trigger : MonoBehaviour
+namespace Test
 {
-    private void OnTriggerEnter(Collider other)
+    public class Finish_trigger : MonoBehaviour
     {
-        if (other.GetComponent<ThirdPersonController>())
+        private void OnTriggerEnter(Collider other)
         {
-            Game_administrator.Singleton.Win_game();
+            if (other.GetComponent<ThirdPersonController>())
+            {
+                Game_administrator.Singleton.Win_game();
+            }
         }
     }
 }

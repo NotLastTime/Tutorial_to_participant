@@ -5,41 +5,48 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Game_administrator : MonoBehaviour
+namespace Test
 {
-
-    internal UnityEvent Win_game_event = new UnityEvent();
-
-    internal UnityEvent Lose_game_event = new UnityEvent();
-
-
-
-    internal static Game_administrator Singleton;
-
-    private void Awake()
+    public class Game_administrator : MonoBehaviour
     {
 
-        Game_Player.Cursor_player(false);
+        internal UnityEvent Win_game_event = new UnityEvent();
 
-        if (Singleton != null && Singleton != this)
+        internal UnityEvent Lose_game_event = new UnityEvent();
+
+        internal UnityEvent<bool> Player_control_event = new UnityEvent<bool>();
+
+
+
+        internal static Game_administrator Singleton;
+
+        private void Awake()
         {
-            Destroy(this);
+
+            Game_Player.Cursor_player(false);
+
+            if (Singleton != null && Singleton != this)
+            {
+                Destroy(this);
+            }
+            else
+            {
+                Singleton = this;
+            }
         }
-        else
+
+
+        public void Win_game()
         {
-            Singleton = this;
+            Win_game_event.Invoke();
+            Player_control_event.Invoke(false);
         }
+
+        public void Lose_game()
+        {
+            Lose_game_event.Invoke();
+            Player_control_event.Invoke(false);
+        }
+
     }
-
-
-    public void Win_game()
-    {
-        Win_game_event.Invoke();
-    }
-
-    public void Lose_game()
-    {
-        Lose_game_event.Invoke();
-    }
-
 }

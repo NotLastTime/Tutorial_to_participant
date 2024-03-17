@@ -3,20 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UI_lose : MonoBehaviour
+namespace Test
 {
-
-    [SerializeField]
-    GameObject Main = null;
-
-    void Start()
+    public class UI_lose : MonoBehaviour
     {
-        Game_administrator.Singleton.Lose_game_event.AddListener(Activation);
-    }
 
-    void Activation()
-    {
-        Main.SetActive(true);
-        Game_Player.Cursor_player(true);
+        [SerializeField]
+        GameObject Main = null;
+
+        void Start()
+        {
+            Game_administrator.Singleton.Lose_game_event.AddListener(Activation);
+        }
+
+        void Activation()
+        {
+            Main.SetActive(true);
+            Game_Player.Cursor_player(true);
+        }
     }
 }
